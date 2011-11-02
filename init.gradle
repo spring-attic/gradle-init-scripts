@@ -1,0 +1,26 @@
+logger.warn('Applying init.gradle to add Artifactory credentials')
+
+addListener(new ArtifactoryCredentials())
+class ArtifactoryCredentials extends BuildAdapter {
+
+    def void projectsLoaded(Gradle gradle) {
+        Project root = gradle.getRootProject()
+        root.allprojects {
+
+            buildscript {
+                repositories {
+                    org.apache.ivy.util.url.CredentialsStore.INSTANCE.addCredentials(
+                        'Artifactory Realm', 'repo.springsource.org',
+                        '${security.getCurrentUsername()}', '${security.getEncryptedPassword()}');
+                }
+            }
+
+            repositories {
+                org.apache.ivy.util.url.CredentialsStore.INSTANCE.addCredentials(
+                    'Artifactory Realm', 'repo.springsource.org',
+                    '${security.getCurrentUsername()}', '${security.getEncryptedPassword()}');
+            }
+        }
+    }
+
+}
