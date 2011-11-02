@@ -1,15 +1,9 @@
 logger.info('Applying wrapper.gradle')
 
-addListener(new AddWrapperTask())
-class AddWrapperTask extends BuildAdapter {
-
-    def void projectsLoaded(Gradle gradle) {
-        Project root = gradle.getRootProject()
-        root.task([ type: Wrapper ], 'wrapper', {
-            description = 'Creates gradlew[.bat] scripts'
-            jarFile = '.wrapper/gradle-wrapper.jar';
-            gradleVersion='1.0-milestone-5'
-        })
-    }
-
+gradle.projectsLoaded {
+    rootProject.task([ type: Wrapper ], 'wrapper', {
+        description = 'Creates gradlew[.bat] scripts'
+        jarFile = '.wrapper/gradle-wrapper.jar';
+        gradleVersion='1.0-milestone-5'
+    })
 }
