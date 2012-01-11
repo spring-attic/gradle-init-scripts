@@ -1,9 +1,0 @@
-logger.info('Applying wrapper.gradle')
-
-gradle.projectsLoaded {
-    rootProject.task([ type: Wrapper ], 'wrapper', {
-        description = 'Creates gradlew[.bat] scripts'
-        jarFile = '.wrapper/gradle-wrapper.jar';
-        gradleVersion='1.0-milestone-5'
-    })
-}
