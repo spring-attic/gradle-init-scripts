@@ -1,18 +1,29 @@
-logger.info('Applying init.gradle to add Artifactory credentials')
+// Decorates any maven repository declarations with Artifactory credentials
+// in order to respond to 401 auth challenges that may occur when requesting
+// artifacts that have not previously been cached on the server.
 
-gradle.projectsLoaded {
-    rootProject.allprojects {
-        buildscript {
-            repositories {
-                org.apache.ivy.util.url.CredentialsStore.INSTANCE.addCredentials(
-                    'Artifactory Realm', 'repo.springsource.org',
-                    '${security.getCurrentUsername()}', '${security.getEncryptedPassword()}');
+// Requires Gradle 1.0-milestone-6 or better in order work with newer
+// "maven { url ... }" repository syntax. Acts as a no-op for earlier versions.
+if (gradle.gradleVersion >= '1.0-milestone-6') {
+
+    logger.info('Applying init.gradle to add Artifactory credentials')
+
+    gradle.projectsLoaded {
+        rootProject.allprojects {
+            buildscript {
+                repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
+                    credentials {
+                        username = '${security.getCurrentUsername()}'
+                        password = '${security.getEncryptedPassword()}'
+                    }
+                }
             }
-        }
-        repositories {
-            org.apache.ivy.util.url.CredentialsStore.INSTANCE.addCredentials(
-                'Artifactory Realm', 'repo.springsource.org',
-                '${security.getCurrentUsername()}', '${security.getEncryptedPassword()}');
+            repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
+                credentials {
+                    username = '${security.getCurrentUsername()}'
+                    password = '${security.getEncryptedPassword()}'
+                }
+            }
         }
     }
 }
