@@ -28,7 +28,7 @@ Accessing artifactory outside the browser requires use of an encrypted password.
 Download `init.gradle` into your `GRADLE_HOME` directory (`wget` is used below, but may be done via the browser as well):
 
     $ cd ~/.gradle
-    $ wget --user=me --ask-password https://repo.springsource.org/init_scripts
+    $ wget --user=me --ask-password https://repo.springsource.org/gradle-init-scripts/init.gradle
     Password for user 'bob': <my-encrypted-password>
     ...
 

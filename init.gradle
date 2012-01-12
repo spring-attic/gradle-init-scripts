@@ -2,6 +2,8 @@
 // in order to respond to 401 auth challenges that may occur when requesting
 // artifacts that have not previously been cached on the server.
 
+// See https://github.com/SpringSource/gradle-init-scripts#readme for details.
+
 // Requires Gradle 1.0-milestone-6 or better in order work with newer
 // "maven { url ... }" repository syntax. Acts as a no-op for earlier versions.
 if (gradle.gradleVersion >= '1.0-milestone-6') {
