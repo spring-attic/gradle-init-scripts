@@ -1,4 +1,3 @@
-
 Gradle [init scripts](http://www.gradle.org/init_scripts), as deployed to https://repo.springsource.org/gradle-init-scripts. Note that authentication is required for the gradle-init-scripts repository, meaning that only SpringSource employees will have access. This is because the files are deployed as [filtered resources](http://wiki.jfrog.org/confluence/display/RTF/Filtered+Resources) within Artifactory, allowing dynamic content such as one's Artifactory username and password information to be customized on the fly during download. Requiring users to authenticate ensures that this filtering happens properly.
 
 # init.gradle
@@ -19,7 +18,8 @@ becomes the equivalent of
 
 ### Download via browser
 
-Go to https://repo.springsource.org/gradle-init-scripts/init.gradle, enter your LDAP username and password when prompted. Save the file into your `GRADLE_HOME` directory, e.g. `~/.gradle`.  Notice that your username and encrypted password values have automatically been filtered into the file on download.
+1. Log into https://repo.springsource.org with your LDAP username and password when prompted. Click 'remember me'.
+2. Go to https://repo.springsource.org/webapp/browserepo.html?pathId=init_scripts%3Ainit.gradle and click 'Download', saving the file into your `GRADLE_HOME` directory, e.g. `~/.gradle`.  Alternatively, you may dowload the file directly from https://repo.springsource.org/gradle-init-scripts/init.gradle, but ensure that you have logged in as per step (1) first!  Once downloaded, inspect the file and notice that your username and _encrypted_ password values have automatically been filtered into the file on the fly during download.
 
 ### Or download via command line
 
