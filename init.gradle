@@ -5,26 +5,24 @@
 // See https://github.com/SpringSource/gradle-init-scripts#readme for details.
 
 // Requires Gradle 1.0-milestone-6 or better in order work with newer
-// "maven { url ... }" repository syntax. Acts as a no-op for earlier versions.
-if (gradle.gradleVersion >= '1.0-milestone-6') {
+// "maven { url ... }" repository syntax. Will cause errors against earlier
+// versions.
+logger.info('Applying init.gradle to add Artifactory credentials')
 
-    logger.info('Applying init.gradle to add Artifactory credentials')
-
-    gradle.projectsLoaded {
-        rootProject.allprojects {
-            buildscript {
-                repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
-                    credentials {
-                        username = '${security.getCurrentUsername()}'
-                        password = '${security.getEncryptedPassword()}'
-                    }
-                }
-            }
+gradle.projectsLoaded {
+    rootProject.allprojects {
+        buildscript {
             repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
                 credentials {
                     username = '${security.getCurrentUsername()}'
                     password = '${security.getEncryptedPassword()}'
                 }
+            }
+        }
+        repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
+            credentials {
+                username = '${security.getCurrentUsername()}'
+                password = '${security.getEncryptedPassword()}'
             }
         }
     }
