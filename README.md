@@ -1,10 +1,10 @@
-Gradle [init scripts](http://www.gradle.org/init_scripts), as deployed to https://repo.springsource.org/gradle-init-scripts. Note that authentication is required for the gradle-init-scripts repository, meaning that only SpringSource employees will have access. This is because the files are deployed as [filtered resources](http://wiki.jfrog.org/confluence/display/RTF/Filtered+Resources) within Artifactory, allowing dynamic content such as one's Artifactory username and password information to be customized on the fly during download. Requiring users to authenticate ensures that this filtering happens properly.
+Gradle [init scripts](http://www.gradle.org/init_scripts), as deployed to https://repo.spring.io/gradle-init-scripts. Note that authentication is required for the gradle-init-scripts repository, meaning that only SpringSource employees will have access. This is because the files are deployed as [filtered resources](http://wiki.jfrog.org/confluence/display/RTF/Filtered+Resources) within Artifactory, allowing dynamic content such as one's Artifactory username and password information to be customized on the fly during download. Requiring users to authenticate ensures that this filtering happens properly.
 
 # init.gradle
 
 ## Purpose
 
-`init.gradle` decorates any maven repositories declared in your project's Gradle build scripts, adding your Artifactory username and password credentials.  This is important because most of the repositories at repo.springsource.org are configured in such a way that they will issue a 401 auth challenge if a user attempts to download any new artifacts, i.e. jars coming from remote repositories that have not previously been cached within Artifactory.  This is important to avoid repo.springsource.org acting as an "open proxy" to the world.  Authenticated users (SpringSource employees, build servers, etc) may download and cache new artifacts, but the anonymous user may not.  This means that anonymous users are able to download all SpringSource-created artifacts and all their transitive dependencies, but not dependencies of their own applications that have not otherwised been previously cached.
+`init.gradle` decorates any maven repositories declared in your project's Gradle build scripts, adding your Artifactory username and password credentials.  This is important because most of the repositories at repo.spring.io are configured in such a way that they will issue a 401 auth challenge if a user attempts to download any new artifacts, i.e. jars coming from remote repositories that have not previously been cached within Artifactory.  This is important to avoid repo.spring.io acting as an "open proxy" to the world.  Authenticated users (SpringSource employees, build servers, etc) may download and cache new artifacts, but the anonymous user may not.  This means that anonymous users are able to download all SpringSource-created artifacts and all their transitive dependencies, but not dependencies of their own applications that have not otherwised been previously cached.
 
 As described in the [Gradle documentation on init scripts](http://www.gradle.org/init_scripts), if a file named `init.gradle` is present in your `GRADLE_HOME` directory, it will be automatically applied when running gradle builds.  This means that
 
@@ -18,17 +18,17 @@ becomes the equivalent of
 
 ### Download via browser
 
-1. Log into https://repo.springsource.org with your LDAP username and password when prompted. Click 'remember me'.
-2. Go to https://repo.springsource.org/webapp/browserepo.html?pathId=init_scripts%3Ainit.gradle and click 'Download', saving the file into your `GRADLE_HOME` directory, e.g. `~/.gradle`.  Alternatively, you may dowload the file directly from https://repo.springsource.org/gradle-init-scripts/init.gradle, but ensure that you have logged in as per step (1) first!  Once downloaded, inspect the file and notice that your username and _encrypted_ password values have automatically been filtered into the file on the fly during download.
+1. Log into https://repo.spring.io with your LDAP username and password when prompted. Click 'remember me'.
+2. Go to https://repo.spring.io/webapp/browserepo.html?pathId=init_scripts%3Ainit.gradle and click 'Download', saving the file into your `GRADLE_HOME` directory, e.g. `~/.gradle`.  Alternatively, you may dowload the file directly from https://repo.spring.io/gradle-init-scripts/init.gradle, but ensure that you have logged in as per step (1) first!  Once downloaded, inspect the file and notice that your username and _encrypted_ password values have automatically been filtered into the file on the fly during download.
 
 ### Or download via command line
 
-Accessing artifactory outside the browser requires use of an encrypted password.  Retrieve your encrypted password from Artifactory at https://repo.springsource.org/webapp/profile.html ([detailed instructions](http://wiki.jfrog.org/confluence/display/RTF/Centrally+Secure+Passwords#CentrallySecurePasswords-UsingYourSecurePassword))
+Accessing artifactory outside the browser requires use of an encrypted password.  Retrieve your encrypted password from Artifactory at https://repo.spring.io/webapp/profile.html ([detailed instructions](http://wiki.jfrog.org/confluence/display/RTF/Centrally+Secure+Passwords#CentrallySecurePasswords-UsingYourSecurePassword))
 
 Download `init.gradle` into your `GRADLE_HOME` directory (`wget` is used below, but may be done via the browser as well):
 
     $ cd ~/.gradle
-    $ wget --user=me --ask-password https://repo.springsource.org/gradle-init-scripts/init.gradle
+    $ wget --user=me --ask-password https://repo.spring.io/gradle-init-scripts/init.gradle
     Password for user 'bob': <my-encrypted-password>
     ...
 
@@ -59,25 +59,25 @@ Run without arguments for usage information:
 
     $ ./deploy.sh
     usage: ./deploy.sh file1 file2 ...
-      - each file will be deployed to https://repo.springsource.org/gradle-init-scripts
+      - each file will be deployed to https://repo.spring.io/gradle-init-scripts
       - provide the encrypted password for user 'buildmaster' when prompted
       - shell expansion is allowed, e.g.: ./deploy.sh *.gradle
 
 ## Deploy file(s)
 
     $ ./deploy.sh init.gradle
-    Deploying init.gradle to https://repo.springsource.org/gradle-init-scripts/init.gradle
+    Deploying init.gradle to https://repo.spring.io/gradle-init-scripts/init.gradle
     Enter host password for user 'buildmaster': <buildmaster-encrypted-password>
 
 This command will return with something similar to the following (per the Artifactory [REST API](http://wiki.jfrog.org/confluence/display/RTF/Artifactory's+REST+API#Artifactory%27sRESTAPI-DeployArtifact)), indicating that the file has been successfully deployed.
 
     {
-      "uri" : "https://repo.springsource.org/gradle-init-scripts/init.gradle",
+      "uri" : "https://repo.spring.io/gradle-init-scripts/init.gradle",
       "repo" : "gradle-init-scripts",
       "path" : "/init.gradle",
       "created" : "2012-01-11T12:53:47.227Z",
       "createdBy" : "buildmaster",
-      "downloadUri" : "https://repo.springsource.org/gradle-init-scripts/init.gradle",
+      "downloadUri" : "https://repo.spring.io/gradle-init-scripts/init.gradle",
       "mimeType" : "text/x-groovy-source",
       "size" : 1079,
       "checksums" : {

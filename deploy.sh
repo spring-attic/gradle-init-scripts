@@ -1,5 +1,5 @@
 #!/bin/bash
-REPO_URL=https://repo.springsource.org/gradle-init-scripts
+REPO_URL=https://repo.spring.io/gradle-init-scripts
 REPO_USER=buildmaster
 
 if [ $# -eq 0 ]; then

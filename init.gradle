@@ -12,14 +12,18 @@ logger.info('Applying init.gradle to add Artifactory credentials')
 gradle.projectsLoaded {
     rootProject.allprojects {
         buildscript {
-            repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
+            repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching {
+                it.url.host == 'repo.springsource.org' || it.url.host == 'repo.spring.io'
+            }.all {
                 credentials {
                     username = '${security.getCurrentUsername()}'
                     password = '${security.getEncryptedPassword()}'
                 }
             }
         }
-        repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching { it.url.host == 'repo.springsource.org' }.all {
+        repositories.withType(org.gradle.api.artifacts.repositories.MavenArtifactRepository).matching {
+            it.url.host == 'repo.springsource.org' || it.url.host == 'repo.spring.io'
+        }.all {
             credentials {
                 username = '${security.getCurrentUsername()}'
                 password = '${security.getEncryptedPassword()}'
