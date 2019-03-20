@@ -1,4 +1,4 @@
-Gradle [init scripts](http://www.gradle.org/init_scripts), as deployed to https://repo.spring.io/gradle-init-scripts. Note that authentication is required for the gradle-init-scripts repository, meaning that only SpringSource employees will have access. This is because the files are deployed as [filtered resources](http://wiki.jfrog.org/confluence/display/RTF/Filtered+Resources) within Artifactory, allowing dynamic content such as one's Artifactory username and password information to be customized on the fly during download. Requiring users to authenticate ensures that this filtering happens properly.
+Gradle [init scripts](https://www.gradle.org/init_scripts), as deployed to https://repo.spring.io/gradle-init-scripts. Note that authentication is required for the gradle-init-scripts repository, meaning that only SpringSource employees will have access. This is because the files are deployed as [filtered resources](https://wiki.jfrog.org/confluence/display/RTF/Filtered+Resources) within Artifactory, allowing dynamic content such as one's Artifactory username and password information to be customized on the fly during download. Requiring users to authenticate ensures that this filtering happens properly.
 
 # init.gradle
 
@@ -6,7 +6,7 @@ Gradle [init scripts](http://www.gradle.org/init_scripts), as deployed to https:
 
 `init.gradle` decorates any maven repositories declared in your project's Gradle build scripts, adding your Artifactory username and password credentials.  This is important because most of the repositories at repo.spring.io are configured in such a way that they will issue a 401 auth challenge if a user attempts to download any new artifacts, i.e. jars coming from remote repositories that have not previously been cached within Artifactory.  This is important to avoid repo.spring.io acting as an "open proxy" to the world.  Authenticated users (SpringSource employees, build servers, etc) may download and cache new artifacts, but the anonymous user may not.  This means that anonymous users are able to download all SpringSource-created artifacts and all their transitive dependencies, but not dependencies of their own applications that have not otherwised been previously cached.
 
-As described in the [Gradle documentation on init scripts](http://www.gradle.org/init_scripts), if a file named `init.gradle` is present in your `GRADLE_HOME` directory, it will be automatically applied when running gradle builds.  This means that
+As described in the [Gradle documentation on init scripts](https://www.gradle.org/init_scripts), if a file named `init.gradle` is present in your `GRADLE_HOME` directory, it will be automatically applied when running gradle builds.  This means that
 
     $ ./gradlew build
 
@@ -23,7 +23,7 @@ becomes the equivalent of
 
 ### Or download via command line
 
-Accessing artifactory outside the browser requires use of an encrypted password.  Retrieve your encrypted password from Artifactory at https://repo.spring.io/webapp/profile.html ([detailed instructions](http://wiki.jfrog.org/confluence/display/RTF/Centrally+Secure+Passwords#CentrallySecurePasswords-UsingYourSecurePassword))
+Accessing artifactory outside the browser requires use of an encrypted password.  Retrieve your encrypted password from Artifactory at https://repo.spring.io/webapp/profile.html ([detailed instructions](https://wiki.jfrog.org/confluence/display/RTF/Centrally+Secure+Passwords#CentrallySecurePasswords-UsingYourSecurePassword))
 
 Download `init.gradle` into your `GRADLE_HOME` directory (`wget` is used below, but may be done via the browser as well):
 
@@ -46,7 +46,7 @@ Note that `init.gradle` requires Gradle 1.0-milestone-6 or better to work.  It a
 
 # Staying up to date
 
-Authenticated users may [place a watch](http://wiki.jfrog.org/confluence/display/RTF/Watches) on `init.gradle` or the entire gradle-init-scripts repository in order to be emailed any time a change is made.  When notified, simply repeat the instructions above to download and use the new version.
+Authenticated users may [place a watch](https://wiki.jfrog.org/confluence/display/RTF/Watches) on `init.gradle` or the entire gradle-init-scripts repository in order to be emailed any time a change is made.  When notified, simply repeat the instructions above to download and use the new version.
 
 
 # Administrative notes (using deploy.sh)
@@ -69,7 +69,7 @@ Run without arguments for usage information:
     Deploying init.gradle to https://repo.spring.io/gradle-init-scripts/init.gradle
     Enter host password for user 'buildmaster': <buildmaster-encrypted-password>
 
-This command will return with something similar to the following (per the Artifactory [REST API](http://wiki.jfrog.org/confluence/display/RTF/Artifactory's+REST+API#Artifactory%27sRESTAPI-DeployArtifact)), indicating that the file has been successfully deployed.
+This command will return with something similar to the following (per the Artifactory [REST API](https://wiki.jfrog.org/confluence/display/RTF/Artifactory's+REST+API#Artifactory%27sRESTAPI-DeployArtifact)), indicating that the file has been successfully deployed.
 
     {
       "uri" : "https://repo.spring.io/gradle-init-scripts/init.gradle",
