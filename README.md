@@ -1,3 +1,5 @@
+# gradle-init-scripts is no longer actively maintained by VMware, Inc.
+
 Gradle [init scripts](http://www.gradle.org/init_scripts), as deployed to https://repo.spring.io/gradle-init-scripts. Note that authentication is required for the gradle-init-scripts repository, meaning that only SpringSource employees will have access. This is because the files are deployed as [filtered resources](http://wiki.jfrog.org/confluence/display/RTF/Filtered+Resources) within Artifactory, allowing dynamic content such as one's Artifactory username and password information to be customized on the fly during download. Requiring users to authenticate ensures that this filtering happens properly.
 
 # init.gradle
